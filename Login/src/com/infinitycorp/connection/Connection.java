@@ -11,4 +11,5 @@ package com.infinitycorp.connection;
  */
 public class Connection {
     
+    
 }
