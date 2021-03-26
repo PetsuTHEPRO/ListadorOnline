@@ -9,14 +9,14 @@ package com.infinitycorp.model.identity;
  *
  * @author perge
  */
-public class Usuarios {
+public class User {
    
     private String name;
     private String description;
     private boolean visibility;
     private int avatar;
 
-    public Usuarios(String name, String description, boolean visibility, int avatar) {
+    public User(String name, String description, boolean visibility, int avatar) {
         this.name = name;
         this.description = description;
         this.visibility = visibility;

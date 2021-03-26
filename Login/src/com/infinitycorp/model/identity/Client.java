@@ -11,7 +11,7 @@ import java.util.Date;
  *
  * @author perge
  */
-public class Cliente {
+public class Client {
     
     private int id;
     private String name;
@@ -19,7 +19,7 @@ public class Cliente {
     private String password;
     private Date birthDate;
     
-    public Cliente(){
+    public Client(){
     
     }
 
