@@ -4,18 +4,25 @@
  * and open the template in the editor.
  */
 package com.infinitycorp.view;
+import java.sql.*;
+import com.infinitycorp.connection.Conexao;
 
 /**
  *
  * @author perge
  */
 public class Login extends javax.swing.JFrame {
-
+    
+    Connection connection = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
     /**
      * Creates new form Login
      */
     public Login() {
         initComponents();
+        connection = Conexao.conector();
+        System.out.println(connection);
     }
 
     /**
