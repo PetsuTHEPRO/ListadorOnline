@@ -5,10 +5,28 @@
  */
 package com.infinitycorp.model.identity;
 
+import java.util.Date;
+
 /**
  *
  * @author junior nuness
  */
-public class Delivery {
+public class Delivery extends Sweepstakes{
     
+    private Date dateDelivery;
+    private String situation;
+
+    public Delivery(Date dateDelivery, String name, Date dateSweepstake, String description) {
+        super(name, dateSweepstake, description);
+        this.dateDelivery = dateDelivery;
+    }
+
+    public Date getDateDelivery() {
+        return dateDelivery;
+    }
+
+    public void setDateDelivery(Date dateDelivery) {
+        this.dateDelivery = dateDelivery;
+    }
+      
 }

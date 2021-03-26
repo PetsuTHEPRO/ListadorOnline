@@ -9,9 +9,13 @@ public class Client {
     private String user; 
     private String password;
     private Date birthDate;
-    
-    public Client(){
-    
+
+    public Client(int id, String name, String user, String password, Date birthDate) {
+        this.id = id;
+        this.name = name;
+        this.user = user;
+        this.password = password;
+        this.birthDate = birthDate;
     }
 
     public String getName() {
