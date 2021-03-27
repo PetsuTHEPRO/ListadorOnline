@@ -13,8 +13,8 @@ import java.util.Date;
  */
 public class Delivery extends Sweepstakes{
     
-    private Date dateDelivery;
-    private String situation;
+    protected Date dateDelivery;
+    protected String situation;
 
     public Delivery(Date dateDelivery, String name, Date dateSweepstake, String description) {
         super(name, dateSweepstake, description);
