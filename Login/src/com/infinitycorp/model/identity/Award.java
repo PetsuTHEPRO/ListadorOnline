@@ -6,9 +6,9 @@ public class Award extends Sweepstakes{
     
     protected String nameAward;
     
-    public Award(String name, Date dateSweepstake, String description) {
+    public Award(String nameAward, String name, Date dateSweepstake, String description) {
         super(name, dateSweepstake, description);
-        
+        this.nameAward = nameAward;
     }
     
     
