@@ -15,6 +15,8 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 /**
  *
@@ -25,8 +27,7 @@ public class Login extends javax.swing.JFrame {
     Connection connection = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
-    private final LoginController controller;
-    
+    private final LoginController controller;    
     /**
      * Creates new form Login
      */
@@ -50,7 +51,7 @@ public class Login extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         lblUsuario = new javax.swing.JLabel();
         lblSenha = new javax.swing.JLabel();
-        txtUsuario = new javax.swing.JTextField();
+        txtClient = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -75,12 +76,13 @@ public class Login extends javax.swing.JFrame {
         lblSenha.setText("Senha:");
         lblSenha.setToolTipText("");
 
-        txtUsuario.setBackground(new java.awt.Color(74, 80, 67));
-        txtUsuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        txtUsuario.setMargin(new java.awt.Insets(2, 10, 2, 2));
-        txtUsuario.addActionListener(new java.awt.event.ActionListener() {
+        txtClient.setBackground(new java.awt.Color(74, 80, 67));
+        txtClient.setForeground(new java.awt.Color(255, 255, 255));
+        txtClient.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtClient.setMargin(new java.awt.Insets(2, 10, 2, 2));
+        txtClient.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUsuarioActionPerformed(evt);
+                txtClientActionPerformed(evt);
             }
         });
 
@@ -190,7 +192,7 @@ public class Login extends javax.swing.JFrame {
                         .addGap(92, 92, 92)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtClient, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblInfoText, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(153, 153, 153)
@@ -215,7 +217,7 @@ public class Login extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblUsuario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtClient, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
                 .addComponent(lblSenha)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -249,9 +251,9 @@ public class Login extends javax.swing.JFrame {
         this.controller.showMessage();
     }//GEN-LAST:event_jLabel2MouseClicked
 
-    private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
+    private void txtClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClientActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtUsuarioActionPerformed
+    }//GEN-LAST:event_txtClientActionPerformed
 
     /**
      * @param args the command line arguments
@@ -305,11 +307,29 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel lblInfoText;
     private javax.swing.JLabel lblSenha;
     private javax.swing.JLabel lblUsuario;
+    private javax.swing.JTextField txtClient;
     private javax.swing.JPasswordField txtPassword;
-    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 
     public void showMessagePane(String mensagem) {
         lblInfoText.setText(mensagem);
     }
+
+    public JTextField getTxtClient() {
+        return txtClient;
+    }
+
+    public void setTxtClient(JTextField txtClient) {
+        this.txtClient = txtClient;
+    }
+
+    public JPasswordField getTxtPassword() {
+        return txtPassword;
+    }
+
+    public void setTxtPassword(JPasswordField txtPassword) {
+        this.txtPassword = txtPassword;
+    }
+    
+    
 }
