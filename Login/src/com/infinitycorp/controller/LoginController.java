@@ -17,10 +17,13 @@ public class LoginController {
     }
     
     public void loginSystem(){
+        
         Client clientController = helper.getModelo();
+        
     }
     
     public void checkIfFieldsIsEmpty(){
+        
         String campo1 = view.getTxtClient().getText();
         String campo2 = view.getTxtPassword().getText();
         
