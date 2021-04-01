@@ -4,6 +4,7 @@ package com.infinitycorp.controller;
 import com.infinitycorp.view.Login;
 import com.infinitycorp.controller.helpers.LoginHelper;
 import com.infinitycorp.model.identity.Client;
+import java.awt.Color;
 
 public class LoginController {
     
@@ -24,13 +25,13 @@ public class LoginController {
         String campo2 = view.getTxtPassword().getText();
         
         if(campo1.isEmpty() && campo2.isEmpty()){
-            showMessage("Preenchar todos os campos");
+            showMessage("Preenchar todos os campos!", Color.YELLOW);
         }
         
     }
     
-    public void showMessage(String msg){
-        this.view.showMessagePane(msg);
+    public void showMessage(String msg, Color cor){
+        this.view.showMessagePane(msg, cor);
     }
     
     
