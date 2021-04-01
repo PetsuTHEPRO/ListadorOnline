@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.infinitycorp.model.identity;
 
 import java.util.Date;
 
-/**
- *
- * @author perge
- */
 public class Client {
     
     private int id;
@@ -18,9 +9,13 @@ public class Client {
     private String user; 
     private String password;
     private Date birthDate;
-    
-    public Client(){
-    
+
+    public Client(int id, String name, String user, String password, Date birthDate) {
+        this.id = id;
+        this.name = name;
+        this.user = user;
+        this.password = password;
+        this.birthDate = birthDate;
     }
 
     public String getName() {
