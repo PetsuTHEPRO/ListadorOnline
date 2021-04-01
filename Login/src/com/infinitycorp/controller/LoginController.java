@@ -19,8 +19,18 @@ public class LoginController {
         Client clientController = helper.getModelo();
     }
     
-    public void showMessage(){
-        this.view.showMessagePane("Preenchar todos os campos!");
+    public void checkIfFieldsIsEmpty(){
+        String campo1 = view.getTxtClient().getText();
+        String campo2 = view.getTxtPassword().getText();
+        
+        if(campo1.isEmpty() && campo2.isEmpty()){
+            showMessage("Preenchar todos os campos");
+        }
+        
+    }
+    
+    public void showMessage(String msg){
+        this.view.showMessagePane(msg);
     }
     
     
