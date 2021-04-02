@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Conexao {
-    
+        
     public static Connection conector(){
         
         String url = "jdbc:mysql://localhost:3306/dblistagemonline";
@@ -24,7 +24,21 @@ public class Conexao {
         } catch (SQLException ex){
             System.out.println("ERRO ao TENTAR Conectar | SQL");
         }
+        
         return null;
+    }
+    
+    public static void desconector(Connection conexao){   
+        
+        if (conexao != null) {
+            
+            try {
+              conexao.close();
+            } catch (SQLException e) {
+              //TODO: use um sistema de log apropriado.
+              e.printStackTrace();
+            }    
+         }
     }
     
 }

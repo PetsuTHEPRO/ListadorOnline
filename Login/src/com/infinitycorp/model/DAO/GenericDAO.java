@@ -6,6 +6,7 @@
 package com.infinitycorp.model.DAO;
 
 import com.infinitycorp.connection.Conexao;
+import com.infinitycorp.model.identity.Client;
 import com.mysql.jdbc.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,7 +24,7 @@ public class GenericDAO {
         this.connection = new Conexao().conector();
     }
     
-    public boolean selectGeneric(String select, Object... paramentos) throws SQLException{
+    public Client selectGeneric(String select, Object... paramentos) throws SQLException{
         
         PreparedStatement pStatement = connection.prepareStatement(select);
         
@@ -34,9 +35,21 @@ public class GenericDAO {
         pStatement.execute();
 
         ResultSet rSet = pStatement.getResultSet();
-
-        return rSet.next();
-
+        
+        if(rSet.next()){
+            
+            Client client = new Client();
+            
+            client.setId(rSet.getInt("id"));
+            client.setName(rSet.getString("name"));
+            client.setUser(rSet.getString("user"));
+            client.setPassword(rSet.getString("password"));
+            client.setBirthDate(rSet.getDate("birthDate"));
+            
+            return client;
+        }
+        
+        return null;
     }
     
     public boolean insertGeneric(String insert, Object... paramentos) throws SQLException{
