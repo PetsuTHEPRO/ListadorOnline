@@ -19,8 +19,8 @@ public class GenericDAO {
     
     private final Connection connection;
   
-    public GenericDAO(Conexao connection) {
-        this.connection = connection.conector();
+    public GenericDAO() {
+        this.connection = new Conexao().conector();
     }
     
     public boolean selectGeneric(String select, Object... paramentos) throws SQLException{

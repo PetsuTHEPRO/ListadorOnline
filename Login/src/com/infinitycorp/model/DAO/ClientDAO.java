@@ -1,17 +1,12 @@
 
 package com.infinitycorp.model.DAO;
 
-import com.infinitycorp.connection.Conexao;
 import com.infinitycorp.model.identity.Client;
 
 import java.sql.SQLException;
 
 public class ClientDAO extends GenericDAO{
 
-    public ClientDAO(Conexao connection) {
-        super(connection);
-    }
-    
     public void selectClient(Client client) throws SQLException{ 
             
         String sql = "select * from tbusuario where nome= ? and senha= ?";
