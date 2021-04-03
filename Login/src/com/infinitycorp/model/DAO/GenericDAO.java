@@ -21,7 +21,7 @@ public class GenericDAO {
     private final Connection connection;
   
     public GenericDAO() {
-        this.connection = new Conexao().conector();
+        this.connection = Conexao.conector();
     }
     
     public Client selectGeneric(String select, Object... paramentos) throws SQLException{
@@ -45,6 +45,8 @@ public class GenericDAO {
             client.setUser(rSet.getString("user"));
             client.setPassword(rSet.getString("password"));
             client.setBirthDate(rSet.getDate("birthDate"));
+            
+            Conexao.desconector(connection);
             
             return client;
         }

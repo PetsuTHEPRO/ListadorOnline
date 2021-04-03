@@ -21,11 +21,11 @@ public class LoginController {
     public void loginSystem() throws SQLException{
         
         Client clientController = helper.getModelo();
-        
+        System.out.println(clientController.getUser());
         boolean cService = new ClientService().checkIfClientExists(clientController);
         
         if(cService){
-            // Abre o menu
+            showMessage("Logado com sucesso!", Color.GREEN);
         }else{
             showMessage("Usuário ou senha estão incorretos!", Color.RED);
         }
@@ -39,6 +39,7 @@ public class LoginController {
         if(campo1.isEmpty() && campo2.isEmpty()){
             showMessage("Preenchar todos os campos!", Color.YELLOW);
         }else{
+            
             this.loginSystem();
         }
         

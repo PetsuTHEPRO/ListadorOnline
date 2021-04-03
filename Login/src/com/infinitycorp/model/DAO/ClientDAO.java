@@ -9,15 +9,15 @@ public class ClientDAO extends GenericDAO{
 
     public Client selectforNameAndSenha(Client client) throws SQLException{ 
             
-        String sql = "select * from client where name = ? and password = ?";
-
-        return selectGeneric(sql, client.getName(), client.getPassword());            
+        String sql = "SELECT * FROM `client` WHERE `user` LIKE ? AND `password` LIKE ?";
+        
+        return selectGeneric(sql, client.getUser(), client.getPassword());            
 
     }
     
     public Client selectforID(int id) throws SQLException{
         
-        String sql = "select * from tbusuario where id = ?";
+        String sql = "SELECT * FROM `client` where id = ?";
         
         return selectGeneric(sql, id);
     

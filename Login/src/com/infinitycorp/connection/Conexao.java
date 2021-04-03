@@ -17,7 +17,7 @@ public class Conexao {
         try {
             Class.forName(driver);
             conexao = (Connection) DriverManager.getConnection(url, usuario, senha);
-            System.out.println("Construido Com Sucesso");
+            System.out.println("Construido com Sucesso");
             return conexao;
         } catch (ClassNotFoundException ex) {
             System.out.println("ERRO ao TENTAR Conectar");
@@ -33,6 +33,7 @@ public class Conexao {
         if (conexao != null) {
             
             try {
+                System.out.println("Desconectado com Sucesso");
               conexao.close();
             } catch (SQLException e) {
               //TODO: use um sistema de log apropriado.
