@@ -5,6 +5,7 @@ import com.infinitycorp.view.Login;
 import com.infinitycorp.controller.helpers.LoginHelper;
 import com.infinitycorp.model.identity.Client;
 import com.infinitycorp.model.service.ClientService;
+import com.infinitycorp.view.Principal;
 import java.awt.Color;
 
 public class LoginController {
@@ -25,6 +26,9 @@ public class LoginController {
         
         if(cService){
             showMessage("Logado com sucesso!", Color.GREEN);
+            Principal menu = new Principal();
+            menu.setVisible(true);
+            this.view.dispose();
         }else{
             showMessage("Usuário ou senha estão incorretos!", Color.RED);
         }

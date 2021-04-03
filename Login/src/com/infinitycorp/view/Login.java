@@ -10,8 +10,6 @@ import com.infinitycorp.connection.Conexao;
 import com.infinitycorp.controller.LoginController;
 import java.awt.Color;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
