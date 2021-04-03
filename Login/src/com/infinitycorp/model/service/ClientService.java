@@ -3,7 +3,6 @@ package com.infinitycorp.model.service;
 
 import com.infinitycorp.model.DAO.ClientDAO;
 import com.infinitycorp.model.identity.Client;
-import java.sql.SQLException;
 
 public class ClientService {
     
@@ -13,7 +12,7 @@ public class ClientService {
           this.clientDAO = new ClientDAO();
     }
     
-    public boolean checkIfClientExists(Client client) throws SQLException{
+    public boolean checkIfClientExists(Client client){
         return (clientDAO.selectforNameAndSenha(client) != null);
     }
     

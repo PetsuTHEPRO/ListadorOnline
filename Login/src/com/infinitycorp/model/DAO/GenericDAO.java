@@ -24,31 +24,37 @@ public class GenericDAO {
         this.connection = Conexao.conector();
     }
     
-    public Client selectGeneric(String select, Object... paramentos) throws SQLException{
+    public Client selectGeneric(String select, Object... paramentos) {
         
-        PreparedStatement pStatement = connection.prepareStatement(select);
-        
-        for(int i = 0; i < paramentos.length; i++){
-            pStatement.setObject(i+1, paramentos[i]);
-        }
-        
-        pStatement.execute();
+        try{
+            PreparedStatement pStatement = connection.prepareStatement(select);
 
-        ResultSet rSet = pStatement.getResultSet();
-        
-        if(rSet.next()){
-            
-            Client client = new Client();
-            
-            client.setId(rSet.getInt("id"));
-            client.setName(rSet.getString("name"));
-            client.setUser(rSet.getString("user"));
-            client.setPassword(rSet.getString("password"));
-            client.setBirthDate(rSet.getDate("birthDate"));
-            
+            for(int i = 0; i < paramentos.length; i++){
+                pStatement.setObject(i+1, paramentos[i]);
+            }
+
+            pStatement.execute();
+
+            ResultSet rSet = pStatement.getResultSet();
+
+            if(rSet.next()){
+
+                Client client = new Client();
+
+                client.setId(rSet.getInt("id"));
+                client.setName(rSet.getString("name"));
+                client.setUser(rSet.getString("user"));
+                client.setPassword(rSet.getString("password"));
+                client.setBirthDate(rSet.getDate("birthDate"));
+
+                Conexao.desconector(connection);
+
+                return client;
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
             Conexao.desconector(connection);
-            
-            return client;
         }
         
         return null;

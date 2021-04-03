@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public class ClientDAO extends GenericDAO{
 
-    public Client selectforNameAndSenha(Client client) throws SQLException{ 
+    public Client selectforNameAndSenha(Client client){ 
             
         String sql = "SELECT * FROM `client` WHERE `user` LIKE ? AND `password` LIKE ?";
         
@@ -15,7 +15,7 @@ public class ClientDAO extends GenericDAO{
 
     }
     
-    public Client selectforID(int id) throws SQLException{
+    public Client selectforID(int id){
         
         String sql = "SELECT * FROM `client` where id = ?";
         

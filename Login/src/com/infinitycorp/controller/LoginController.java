@@ -6,7 +6,6 @@ import com.infinitycorp.controller.helpers.LoginHelper;
 import com.infinitycorp.model.identity.Client;
 import com.infinitycorp.model.service.ClientService;
 import java.awt.Color;
-import java.sql.SQLException;
 
 public class LoginController {
     
@@ -18,7 +17,7 @@ public class LoginController {
         this.helper = new LoginHelper(view);
     }
     
-    public void loginSystem() throws SQLException{
+    public void loginSystem(){
         
         Client clientController = helper.getModelo();
         System.out.println(clientController.getUser());
@@ -31,7 +30,7 @@ public class LoginController {
         }
     }
     
-    public void checkIfFieldsIsEmpty() throws SQLException{
+    public void checkIfFieldsIsEmpty(){
         
         String campo1 = view.getTxtClient().getText();
         String campo2 = view.getTxtPassword().getText();

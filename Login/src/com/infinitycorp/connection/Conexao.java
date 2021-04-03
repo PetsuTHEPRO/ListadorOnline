@@ -3,6 +3,8 @@ package com.infinitycorp.connection;
 import com.mysql.jdbc.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Conexao {
         
@@ -31,14 +33,12 @@ public class Conexao {
     public static void desconector(Connection conexao){   
         
         if (conexao != null) {
-            
             try {
                 System.out.println("Desconectado com Sucesso");
-              conexao.close();
-            } catch (SQLException e) {
-              //TODO: use um sistema de log apropriado.
-              e.printStackTrace();
-            }    
+                conexao.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+            }
          }
     }
     

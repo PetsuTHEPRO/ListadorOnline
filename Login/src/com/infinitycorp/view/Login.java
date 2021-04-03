@@ -23,13 +23,11 @@ import javax.swing.JTextField;
 public class Login extends javax.swing.JFrame {
     
     Connection connection = null;
-    PreparedStatement pst = null;
-    ResultSet rs = null;
     private final LoginController controller;    
     /**
      * Creates new form Login
      */
-    public Login() throws SQLException {
+    public Login(){
         
         initComponents();
         controller = new LoginController(this);
@@ -241,12 +239,9 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtClientActionPerformed
 
     private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
-        try {
-            // TODO add your handling code here:
-            this.controller.checkIfFieldsIsEmpty();
-        } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
+        this.controller.checkIfFieldsIsEmpty();
+       
     }//GEN-LAST:event_jPanel4MouseClicked
 
     /**
@@ -277,14 +272,8 @@ public class Login extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new Login().setVisible(true);
-                } catch (SQLException ex) {
-                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Login().setVisible(true);
         });
     }
 
