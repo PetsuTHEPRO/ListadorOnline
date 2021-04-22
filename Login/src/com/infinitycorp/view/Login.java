@@ -5,8 +5,6 @@
  */
 package com.infinitycorp.view;
 
-import java.sql.*;
-import com.infinitycorp.connection.Conexao;
 import com.infinitycorp.controller.LoginController;
 import java.awt.Color;
 
@@ -20,17 +18,11 @@ import javax.swing.JTextField;
  */
 public class Login extends javax.swing.JFrame {
     
-    Connection connection = null;
     private final LoginController controller;    
-    /**
-     * Creates new form Login
-     */
+ 
     public Login(){
-        
         initComponents();
         controller = new LoginController(this);
-        connection = Conexao.conector();
-        System.out.println(connection);
     }
 
     /**
@@ -48,9 +40,9 @@ public class Login extends javax.swing.JFrame {
         txtClient = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lblTitutoLogin = new javax.swing.JLabel();
+        lblSubtitutoLogin = new javax.swing.JLabel();
+        lblCadastro = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         lblInfoText = new javax.swing.JLabel();
@@ -84,18 +76,24 @@ public class Login extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(90, 23, 139));
         jPanel2.setBorder(BorderFactory.createMatteBorder(0, 2, 0, 0, new java.awt.Color(190,39,217)));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Listador Online");
+        lblTitutoLogin.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        lblTitutoLogin.setForeground(new java.awt.Color(255, 255, 255));
+        lblTitutoLogin.setText("Listador Online");
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Organize seus IG's para sorteios");
+        lblSubtitutoLogin.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        lblSubtitutoLogin.setForeground(new java.awt.Color(255, 255, 255));
+        lblSubtitutoLogin.setText("Organize seus IG's para sorteios");
 
-        jLabel6.setFont(new java.awt.Font("Monospaced", 3, 12)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(106, 127, 219));
-        jLabel6.setText("Não tem um cadastro ainda? Clique aqui");
-        jLabel6.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(106,127,219)));
+        lblCadastro.setFont(new java.awt.Font("Monospaced", 3, 12)); // NOI18N
+        lblCadastro.setForeground(new java.awt.Color(106, 127, 219));
+        lblCadastro.setText("Não tem um cadastro ainda? Clique aqui");
+        lblCadastro.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(106,127,219)));
+        lblCadastro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblCadastro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCadastroMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -103,26 +101,26 @@ public class Login extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel6)
+                .addComponent(lblCadastro)
                 .addGap(0, 9, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
-                .addComponent(jLabel4)
+                .addComponent(lblSubtitutoLogin)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addComponent(lblTitutoLogin)
                 .addGap(73, 73, 73))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(41, 41, 41)
-                .addComponent(jLabel1)
+                .addComponent(lblTitutoLogin)
                 .addGap(155, 155, 155)
-                .addComponent(jLabel4)
+                .addComponent(lblSubtitutoLogin)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                .addComponent(jLabel6)
+                .addComponent(lblCadastro)
                 .addGap(46, 46, 46))
         );
 
@@ -165,7 +163,7 @@ public class Login extends javax.swing.JFrame {
         lblInfoText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblInfoText.setText("Seja Bem-vindo!");
         lblInfoText.setToolTipText("");
-        lblInfoText.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblInfoText.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         lblInfoText.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -239,8 +237,15 @@ public class Login extends javax.swing.JFrame {
     private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
 
         this.controller.checkIfFieldsIsEmpty();
-       
+        
     }//GEN-LAST:event_jPanel4MouseClicked
+
+    private void lblCadastroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCadastroMouseClicked
+        // TODO add your handling code here:
+        Register telaRegister = new Register();
+        telaRegister.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_lblCadastroMouseClicked
 
     /**
      * @param args the command line arguments
@@ -253,7 +258,7 @@ public class Login extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -276,15 +281,15 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JLabel lblCadastro;
     private javax.swing.JLabel lblInfoText;
     private javax.swing.JLabel lblSenha;
+    private javax.swing.JLabel lblSubtitutoLogin;
+    private javax.swing.JLabel lblTitutoLogin;
     private javax.swing.JLabel lblUsuario;
     private javax.swing.JTextField txtClient;
     private javax.swing.JPasswordField txtPassword;

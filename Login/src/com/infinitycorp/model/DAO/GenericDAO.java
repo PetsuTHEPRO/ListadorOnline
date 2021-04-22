@@ -47,33 +47,32 @@ public class GenericDAO {
                 client.setPassword(rSet.getString("password"));
                 client.setBirthDate(rSet.getDate("birthDate"));
 
-                Conexao.desconector(connection);
-
                 return client;
             }
         }catch(SQLException e){
-            e.printStackTrace();
-        }finally{
-            Conexao.desconector(connection);
+            System.out.println("Error " + e);;
         }
         
         return null;
     }
     
-    public boolean insertGeneric(String insert, Object... paramentos) throws SQLException{
+    public boolean insertGeneric(String insert, Object... paramentos){
 
-        PreparedStatement pStatement = connection.prepareStatement(insert);
-        
-        for(int i = 0; i < paramentos.length; i++){
-            pStatement.setObject(i+1, paramentos[i]);
+        try{
+            
+            PreparedStatement pStatement = connection.prepareStatement(insert);
+
+            for(int i = 0; i < paramentos.length; i++){
+                pStatement.setObject(i+1, paramentos[i]);
+            }
+            
+            return ( (pStatement.executeUpdate()) > 0);
+            
+        }catch(SQLException e){
+            System.out.println("Erro " + e);
         }
         
-        pStatement.execute();
-        
-        ResultSet rSet = pStatement.getResultSet();
-        
-        return rSet.next();
-        
+        return false;
     }
     
     public boolean updateGeneric(String update, Object... paramentos) throws SQLException{

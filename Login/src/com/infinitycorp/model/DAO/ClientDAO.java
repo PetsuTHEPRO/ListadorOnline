@@ -3,16 +3,21 @@ package com.infinitycorp.model.DAO;
 
 import com.infinitycorp.model.identity.Client;
 
-import java.sql.SQLException;
 
 public class ClientDAO extends GenericDAO{
 
-    public Client selectforNameAndSenha(Client client){ 
+    public Client selectforUserAndSenha(Client client){ 
             
         String sql = "SELECT * FROM `client` WHERE `user` LIKE ? AND `password` LIKE ?";
         
         return selectGeneric(sql, client.getUser(), client.getPassword());            
 
+    }
+    
+    public Client selectForUser(Client client){
+        String sql = "SELECT * FROM `client` WHERE `user` LIKE ?";
+        
+        return selectGeneric(sql, client.getUser());
     }
     
     public Client selectforID(int id){
@@ -23,32 +28,32 @@ public class ClientDAO extends GenericDAO{
     
     }
     
-    public void insertClient(Client client) throws SQLException{
+    public boolean insertClient(Client client){
         
-        String sql = "inset into client(name, user, password, birthDate) values (?,?,?,?)";
+        String sql = "insert into client (id, name, user, password, birthDate) VALUES (NULL,?,?,?,?)";
         
-        insertGeneric(sql, client.getName(), client.getUser(), client.getPassword(), client.getBirthDate());
-        
-    }
-    
-    public void updateClient(Client client) throws SQLException{
-        
-        String sql = "update client set name = ?, user = ?, password = ?, birthDate = ? where id = ?";
-        
-        // Incompleto, faltou adicionar a lógica de pegar o ID.
-        
-        updateGeneric(sql, client.getName(), client.getUser(), client.getBirthDate());
+        return insertGeneric(sql, client.getName(), client.getUser(), client.getPassword(), client.getBirthDate());
         
     }
     
-    public void deleteClient(Client client) throws SQLException{
+  //  public void updateClient(Client client) throws SQLException{
         
-        String sql = "delete from client where id = ?";
+   //     String sql = "update client set name = ?, user = ?, password = ?, birthDate = ? where id = ?";
         
         // Incompleto, faltou adicionar a lógica de pegar o ID.
         
-        deleteGeneric(sql);
+    //    updateGeneric(sql, client.getName(), client.getUser(), client.getBirthDate());
         
-    }
+   // }
+    
+   // public void deleteClient(Client client) throws SQLException{
+        
+    //    String sql = "delete from client where id = ?";
+        
+        // Incompleto, faltou adicionar a lógica de pegar o ID.
+        
+  //      deleteGeneric(sql);
+        
+   // }
     
 }

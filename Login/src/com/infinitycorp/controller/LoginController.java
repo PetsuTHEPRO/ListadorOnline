@@ -21,7 +21,7 @@ public class LoginController {
     public void loginSystem(){
         
         Client clientController = helper.getModelo();
-        System.out.println(clientController.getUser());
+
         boolean cService = new ClientService().checkIfClientExists(clientController);
         
         if(cService){
@@ -41,8 +41,7 @@ public class LoginController {
         
         if(campo1.isEmpty() && campo2.isEmpty()){
             showMessage("Preenchar todos os campos!", Color.YELLOW);
-        }else{
-            
+        }else{   
             this.loginSystem();
         }
         
