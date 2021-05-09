@@ -12,7 +12,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class RegisterHelper {
+public class RegisterHelper implements IHelper{
     
     private final Register view;
     

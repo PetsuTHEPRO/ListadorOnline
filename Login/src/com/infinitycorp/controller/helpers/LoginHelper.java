@@ -3,7 +3,7 @@ package com.infinitycorp.controller.helpers;
 import com.infinitycorp.model.identity.Client;
 import com.infinitycorp.view.Login;
 
-public class LoginHelper {
+public class LoginHelper implements IHelper{
     
     private final Login view;
     
@@ -36,5 +36,6 @@ public class LoginHelper {
         view.getTxtClient().setText("");
         view.getTxtPassword().setText("");
     }
+
     
 }
