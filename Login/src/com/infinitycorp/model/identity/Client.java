@@ -6,14 +6,18 @@ public class Client {
     
     private int id;
     private String name;
+    private String lastName;
     private String user; 
+    private String email;
     private String password;
     private Date birthDate;
 
-    public Client(int id, String name, String user, String password, Date birthDate) {
+    public Client(int id, String name, String lastName, String user, String email, String password, Date birthDate) {
         this.id = id;
         this.name = name;
+        this.lastName = lastName;
         this.user = user;
+        this.email = email;
         this.password = password;
         this.birthDate = birthDate;
     }
@@ -38,12 +42,28 @@ public class Client {
         this.name = name;
     }
 
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+    
     public String getUser() {
         return user;
     }
 
     public void setUser(String user) {
         this.user = user;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {

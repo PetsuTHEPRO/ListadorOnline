@@ -25,7 +25,9 @@ public class RegisterHelper implements IHelper{
     public Client getModelo(){
         
         String nameClient = view.getTxtName().getText();
+        String lastNameClient = view.getTxtLastName().getText();
         String userClient = view.getTxtUser().getText();
+        String emailClient = view.getTxtEmail().getText();
         String passwordClient = view.getTxtPassword().getText();
         String dateClient = view.getTxtformBirthDate().getText();
         
@@ -33,7 +35,7 @@ public class RegisterHelper implements IHelper{
         try {
             java.sql.Date data = new java.sql.Date(formato.parse(dateClient).getTime());
             
-            Client modelClient = new Client(0, nameClient, userClient, passwordClient, data);
+            Client modelClient = new Client(0, nameClient, lastNameClient, userClient, emailClient, passwordClient, data);
             return modelClient;
         } catch (ParseException ex) {
             System.out.println("Data Inserida invalida! Error: " + ex);
@@ -45,12 +47,16 @@ public class RegisterHelper implements IHelper{
     public void setModelo(Client modelClient){
         
         String nameClient = modelClient.getName();
+        String lastNameClient = modelClient.getLastName();
         String userClient = modelClient.getUser();
+        String emailClient = modelClient.getEmail();
         String passwordClient = modelClient.getPassword();
         Date dateClient = modelClient.getBirthDate();
         
         view.getTxtName().setText(nameClient);
+        view.getTxtLastName().setText(lastNameClient);
         view.getTxtUser().setText(userClient);
+        view.getTxtEmail().setText(emailClient);
         view.getTxtPassword().setText(passwordClient);
         view.getTxtformBirthDate().setText(new SimpleDateFormat("dd/MM/yyyy").format(dateClient));
         
@@ -58,6 +64,7 @@ public class RegisterHelper implements IHelper{
     
     public void cleanScreen(){
         view.getTxtName().setText("");
+        view.getTxtLastName().setText("");
         view.getTxtUser().setText("");
         view.getTxtPassword().setText("");
         view.getTxtformBirthDate().setText("__/__/____");

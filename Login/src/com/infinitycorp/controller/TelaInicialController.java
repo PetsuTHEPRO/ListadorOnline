@@ -5,12 +5,29 @@
  */
 package com.infinitycorp.controller;
 
+import com.infinitycorp.controller.helpers.TelaInicialHelper;
+import com.infinitycorp.model.DAO.ClientDAO;
 import com.infinitycorp.model.identity.Client;
+import com.infinitycorp.view.TelaInicial;
 
 public class TelaInicialController {
     
-    public TelaInicialController(Client clientDAO){
-        
+    private final TelaInicial view;
+    private final TelaInicialHelper helper;
+    private final Client modeloClient;
+    
+    public TelaInicialController(TelaInicial view, Client clientDAO){
+        this.view = view;
+        this.helper = new TelaInicialHelper(view);
+        this.modeloClient = clientDAO;
+    }
+    
+    public void updateDataProfile(){
+        helper.setModelo(new ClientDAO().selectForUser(modeloClient));
+    }
+    
+    public void inicializeProgram(){
+        this.updateDataProfile();
     }
     
 }

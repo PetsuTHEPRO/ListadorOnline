@@ -5,11 +5,15 @@
  */
 package com.infinitycorp.controller.helpers;
 
+import com.infinitycorp.model.identity.Client;
+
 /**
  *
  * @author perge
  */
 public interface IHelper {
+    
+    public abstract void setModelo(Client modelClient);
     
     public abstract Object getModelo();
     

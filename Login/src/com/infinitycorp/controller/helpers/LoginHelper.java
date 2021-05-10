@@ -16,7 +16,7 @@ public class LoginHelper implements IHelper{
         String userClient = view.getTxtClient().getText();
         String passwordClient = view.getTxtPassword().getText();
         
-        Client modelClient = new Client(0, null, userClient, passwordClient, null);
+        Client modelClient = new Client(0, null, null, userClient, null, passwordClient, null);
         
         return modelClient;
         

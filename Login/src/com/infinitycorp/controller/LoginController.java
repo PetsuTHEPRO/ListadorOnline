@@ -20,14 +20,14 @@ public class LoginController {
     
     public void loginSystem(){
         
-        Client clientController = helper.getModelo();
+        Client clientModelo = helper.getModelo();
 
-        boolean cService = new ClientService().checkIfClientExists(clientController);
+        boolean cService = new ClientService().checkIfClientExists(clientModelo);
         
         if(cService){
-            showMessage("Logado com sucesso!", Color.GREEN);
-            TelaInicial menu = new TelaInicial(clientController);
+            TelaInicial menu = new TelaInicial(clientModelo);
             menu.setVisible(true);
+            showMessage("Logado com sucesso!", Color.GREEN);
             this.view.dispose();
         }else{
             showMessage("Usuário ou senha estão incorretos!", Color.RED);

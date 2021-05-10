@@ -43,7 +43,9 @@ public class GenericDAO {
 
                 client.setId(rSet.getInt("id"));
                 client.setName(rSet.getString("name"));
+                client.setLastName(rSet.getString("lastName"));
                 client.setUser(rSet.getString("user"));
+                client.setEmail(rSet.getString("email"));
                 client.setPassword(rSet.getString("password"));
                 client.setBirthDate(rSet.getDate("birthDate"));
 
