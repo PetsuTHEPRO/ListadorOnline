@@ -117,6 +117,7 @@ public class MenuItem extends javax.swing.JPanel {
         if (action != null) {
             action.actionPerformed(null);
         }
+        
     }//GEN-LAST:event_formMousePressed
 
     

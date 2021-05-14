@@ -52,7 +52,7 @@ public class GenericDAO {
                 return client;
             }
         }catch(SQLException e){
-            System.out.println("Error " + e);;
+            System.out.println("Error " + e);
         }
         
         return null;
