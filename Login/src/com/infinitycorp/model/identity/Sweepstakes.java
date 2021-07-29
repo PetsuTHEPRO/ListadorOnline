@@ -5,11 +5,13 @@ import java.util.Date;
 public class Sweepstakes {
     
     protected String name;
+    private String ownerName;
     protected Date dateSweepstake;
     protected String description;
 
-    public Sweepstakes(String name, Date dateSweepstake, String description) {
+    public Sweepstakes(String name, String ownerName,Date dateSweepstake, String description) {
         this.name = name;
+        this.ownerName = ownerName;
         this.dateSweepstake = dateSweepstake;
         this.description = description;
     }
@@ -20,6 +22,14 @@ public class Sweepstakes {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
     }
 
     public Date getDateSweepstake() {
