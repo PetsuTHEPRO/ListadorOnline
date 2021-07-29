@@ -2,15 +2,15 @@ package com.infinitycorp.model.identity;
 
 import java.util.Date;
 
-public class Award extends Sweepstakes{
+public class Award {
     
-    protected String nameAward;
+    private String nameAward;
+    private String description;
     
-    public Award(String nameAward, String name, Date dateSweepstake, String description) {
-        super(name, dateSweepstake, description);
+    
+    public Award(String nameAward, Date dateAward, String description) {
         this.nameAward = nameAward;
+        this.description = description;
     }
-    
-    
     
 }

@@ -6,6 +6,7 @@
 package com.infinitycorp.model.DAO;
 
 import com.infinitycorp.connection.Conexao;
+import com.infinitycorp.model.identity.Client;
 import com.mysql.jdbc.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,40 +20,61 @@ public class GenericDAO {
     
     private final Connection connection;
   
-    public GenericDAO(Conexao connection) {
-        this.connection = connection.conector();
+    public GenericDAO() {
+        this.connection = Conexao.conector();
     }
     
-    public boolean selectGeneric(String select, Object... paramentos) throws SQLException{
+    public Client selectGeneric(String select, Object... paramentos) {
         
-        PreparedStatement pStatement = connection.prepareStatement(select);
-        
-        for(int i = 0; i < paramentos.length; i++){
-            pStatement.setObject(i+1, paramentos[i]);
+        try{
+            PreparedStatement pStatement = connection.prepareStatement(select);
+
+            for(int i = 0; i < paramentos.length; i++){
+                pStatement.setObject(i+1, paramentos[i]);
+            }
+
+            pStatement.execute();
+
+            ResultSet rSet = pStatement.getResultSet();
+
+            if(rSet.next()){
+
+                Client client = new Client();
+
+                client.setId(rSet.getInt("id"));
+                client.setName(rSet.getString("name"));
+                client.setLastName(rSet.getString("lastName"));
+                client.setUser(rSet.getString("user"));
+                client.setEmail(rSet.getString("email"));
+                client.setPassword(rSet.getString("password"));
+                client.setBirthDate(rSet.getDate("birthDate"));
+
+                return client;
+            }
+        }catch(SQLException e){
+            System.out.println("Error " + e);
         }
         
-        pStatement.execute();
-
-        ResultSet rSet = pStatement.getResultSet();
-
-        return rSet.next();
-
+        return null;
     }
     
-    public boolean insertGeneric(String insert, Object... paramentos) throws SQLException{
+    public boolean insertGeneric(String insert, Object... paramentos){
 
-        PreparedStatement pStatement = connection.prepareStatement(insert);
-        
-        for(int i = 0; i < paramentos.length; i++){
-            pStatement.setObject(i+1, paramentos[i]);
+        try{
+            
+            PreparedStatement pStatement = connection.prepareStatement(insert);
+
+            for(int i = 0; i < paramentos.length; i++){
+                pStatement.setObject(i+1, paramentos[i]);
+            }
+            
+            return ( (pStatement.executeUpdate()) > 0);
+            
+        }catch(SQLException e){
+            System.out.println("Erro " + e);
         }
         
-        pStatement.execute();
-        
-        ResultSet rSet = pStatement.getResultSet();
-        
-        return rSet.next();
-        
+        return false;
     }
     
     public boolean updateGeneric(String update, Object... paramentos) throws SQLException{

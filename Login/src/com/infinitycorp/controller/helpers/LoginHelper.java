@@ -1,20 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.infinitycorp.controller.helpers;
 
 import com.infinitycorp.model.identity.Client;
 import com.infinitycorp.view.Login;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
-/**
- *
- * @author perge
- */
-public class LoginHelper {
+public class LoginHelper implements IHelper{
     
     private final Login view;
     
@@ -23,20 +12,22 @@ public class LoginHelper {
     }
     
     public Client getModelo(){
-        String nameClient = view.getTxtClient().getText();
+        
+        String userClient = view.getTxtClient().getText();
         String passwordClient = view.getTxtPassword().getText();
         
-        Client modelClient = new Client(0, nameClient, passwordClient, null, null);
+        Client modelClient = new Client(0, null, null, userClient, null, passwordClient, null);
         
         return modelClient;
+        
     }
     
     public void setModelo(Client modelClient){
         
-        String nameClient = modelClient.getName();
+        String userClient = modelClient.getUser();
         String passwordClient = modelClient.getPassword();
         
-        view.getTxtClient().setText(nameClient);
+        view.getTxtClient().setText(userClient);
         view.getTxtPassword().setText(passwordClient);
         
     }
@@ -45,5 +36,6 @@ public class LoginHelper {
         view.getTxtClient().setText("");
         view.getTxtPassword().setText("");
     }
+
     
 }
