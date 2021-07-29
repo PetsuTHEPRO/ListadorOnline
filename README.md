@@ -12,15 +12,18 @@
 
 **Sistemas**  
 - [ ] Sistema de Login
-- [ ] Sistema de Cadastro
-**Funções**  
-- [ ] Funcao
-**Cadastros**  
+- [ ] Sistema de Cadastro  
+
+**Funções**
+- [ ] Funcao  
+
+**Cadastros**
 - [ ] Cadastro de Usuário
 - [ ] Cadastro de IG's
 - [ ] Cadastro de Entregas de Premios
-- [ ] Cadastro de Premios
-**Telas**  
+- [ ] Cadastro de Premios  
+
+**Telas**
 - [ ] Tela de Login
 - [ ] Tela de Cadastro
 - [ ] Tela Principal
