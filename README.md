@@ -10,17 +10,17 @@
 
 ## Objetivos
 
-**Sistemas**
+**Sistemas**  
 - [ ] Sistema de Login
 - [ ] Sistema de Cadastro
-**Funções**
+**Funções**  
 - [ ] 
-**Cadastros**
+**Cadastros**  
 - [ ] Cadastro de Usuário
 - [ ] Cadastro de IG's
 - [ ] Cadastro de Entregas de Premios
 - [ ] Cadastro de Premios
-**Telas**
+**Telas**  
 - [ ] Tela de Login
 - [ ] Tela de Cadastro
 - [ ] Tela Principal
