@@ -1,6 +1,6 @@
 package com.infinitycorp.connection;
 
-import com.mysql.jdbc.Connection;
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -14,7 +14,7 @@ public class Conexao {
         String usuario = "root";
         String senha = "";
         Connection conexao = null;
-        String driver = "com.mysql.jdbc.Driver";
+        String driver = "com.mysql.cj.jdbc.Driver";
         
         try {
             Class.forName(driver);

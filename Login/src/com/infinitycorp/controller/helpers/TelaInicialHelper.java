@@ -6,6 +6,7 @@
 package com.infinitycorp.controller.helpers;
 
 import com.infinitycorp.model.identity.Client;
+import com.infinitycorp.model.identity.User;
 import com.infinitycorp.view.TelaInicial;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -31,6 +32,18 @@ public class TelaInicialHelper implements IHelper{
     public void cleanScreen() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    public void cleanScreenUser() {
+        // Limpa os campos de texto
+        view.getUserTxt().setText("");
+        view.getDescricaotxt().setText("");
+
+        // Restaura as caixas de seleção para valores padrão
+        view.getVisibilidadeJBox().setSelectedIndex(0);
+        view.getIsPhotoPerfil().setSelectedIndex(0);
+        view.getAvatarBox().setSelectedItem("João");
+    }
+
 
     @Override
     public void setModelo(Client modelClient) {
@@ -49,6 +62,43 @@ public class TelaInicialHelper implements IHelper{
         view.getTxtPassword().setText(passwordClient);
         view.getTxtformBirthDate().setText(new SimpleDateFormat("dd/MM/yyyy").format(dateClient));
         
+    }
+    
+    public User getModeloUser(){
+        String userTxt = view.getUserTxt().getText();
+        boolean visibilidadeTxt = (view.getVisibilidadeJBox().getSelectedItem().toString().equals("Público"));
+        boolean photoPerfilTxt = (view.getIsPhotoPerfil().getSelectedItem().toString().equals("Sim"));
+        String descricaoTxt = view.getDescricaotxt().getText();
+        String avatar = view.getAvatarBox().getSelectedItem().toString();
+        int avatarNumber = 0;
+        
+        switch(avatar){
+        
+            case "João":
+                avatarNumber = 1;
+            break;
+            
+            case "Maria":
+                avatarNumber = 2;
+            break;
+            
+            
+            case "André":
+                avatarNumber = 3;
+            break;
+            
+            
+            case "Julia":
+                avatarNumber = 4;
+            break;
+            
+            
+            case "Robot":
+                avatarNumber = 5;
+            break;
+        }
+        
+        return new User(userTxt, descricaoTxt, visibilidadeTxt, photoPerfilTxt, avatarNumber);
     }
     
 }

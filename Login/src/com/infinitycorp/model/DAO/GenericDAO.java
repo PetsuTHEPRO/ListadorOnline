@@ -7,7 +7,7 @@ package com.infinitycorp.model.DAO;
 
 import com.infinitycorp.connection.Conexao;
 import com.infinitycorp.model.identity.Client;
-import com.mysql.jdbc.Connection;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
