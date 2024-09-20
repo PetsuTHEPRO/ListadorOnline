@@ -7,6 +7,7 @@ package com.infinitycorp.model.DAO;
 
 import com.infinitycorp.connection.Conexao;
 import com.infinitycorp.model.identity.Client;
+import com.infinitycorp.model.identity.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -58,6 +59,39 @@ public class GenericDAO {
         return null;
     }
     
+    public User selectGenericUser(String select, Object... paramentos) {
+        
+        try{
+            PreparedStatement pStatement = connection.prepareStatement(select);
+
+            for(int i = 0; i < paramentos.length; i++){
+                pStatement.setObject(i+1, paramentos[i]);
+            }
+
+            pStatement.execute();
+
+            ResultSet rSet = pStatement.getResultSet();
+
+            if(rSet.next()){
+
+                User user = new User();
+
+                user.setId(rSet.getInt("id"));
+                user.setName(rSet.getString("name"));
+                user.setDescription(rSet.getString("description"));
+                user.setVisibility(rSet.getBoolean("visibility"));
+                user.setHasProfilePhoto(rSet.getBoolean("has_profile_photo"));
+                user.setAvatar(rSet.getInt("avatar"));
+                
+                return user;
+            }
+        }catch(SQLException e){
+            System.out.println("Error " + e);
+        }
+        
+        return null;
+    }    
+    
     public boolean insertGeneric(String insert, Object... paramentos){
 
         try{
@@ -77,21 +111,27 @@ public class GenericDAO {
         return false;
     }
     
-    public boolean updateGeneric(String update, Object... paramentos) throws SQLException{
+    public boolean updateGeneric(String update, Object... parametros) {
     
-        PreparedStatement pStatement = connection.prepareStatement(update);
+        try {
         
-        for(int i = 0; i < paramentos.length; i ++){
-            pStatement.setObject(i+1, paramentos[i]);
+            PreparedStatement pStatement = connection.prepareStatement(update);
+        
+            for (int i = 0; i < parametros.length; i++) {
+                pStatement.setObject(i + 1, parametros[i]);
+            }
+
+            int rowsAffected = pStatement.executeUpdate();
+
+            return rowsAffected > 0;
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao executar atualização: " + e.getMessage());
         }
-        
-        pStatement.execute();
-        
-        ResultSet rSet = pStatement.getResultSet();
-        
-        return rSet.next();
-        
+
+        return false;
     }
+
     
     public boolean deleteGeneric(String delete, Object... paramentos) throws SQLException{
         

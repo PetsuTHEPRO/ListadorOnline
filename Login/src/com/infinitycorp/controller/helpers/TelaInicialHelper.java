@@ -35,7 +35,7 @@ public class TelaInicialHelper implements IHelper{
     
     public void cleanScreenUser() {
         // Limpa os campos de texto
-        view.getUserTxt().setText("");
+        view.getUserInstagramTxt().setText("");
         view.getDescricaotxt().setText("");
 
         // Restaura as caixas de seleção para valores padrão
@@ -43,7 +43,6 @@ public class TelaInicialHelper implements IHelper{
         view.getIsPhotoPerfil().setSelectedIndex(0);
         view.getAvatarBox().setSelectedItem("João");
     }
-
 
     @Override
     public void setModelo(Client modelClient) {
@@ -65,7 +64,7 @@ public class TelaInicialHelper implements IHelper{
     }
     
     public User getModeloUser(){
-        String userTxt = view.getUserTxt().getText();
+        String userTxt = view.getUserInstagramTxt().getText();
         boolean visibilidadeTxt = (view.getVisibilidadeJBox().getSelectedItem().toString().equals("Público"));
         boolean photoPerfilTxt = (view.getIsPhotoPerfil().getSelectedItem().toString().equals("Sim"));
         String descricaoTxt = view.getDescricaotxt().getText();
@@ -98,7 +97,25 @@ public class TelaInicialHelper implements IHelper{
             break;
         }
         
-        return new User(userTxt, descricaoTxt, visibilidadeTxt, photoPerfilTxt, avatarNumber);
+        return new User(-1, userTxt, descricaoTxt, visibilidadeTxt, photoPerfilTxt, avatarNumber);
+    }
+
+    public void setModeloUser(User modelUser) {
+        
+        String nameUser = modelUser.getName();
+        String description = modelUser.getDescription();
+        int visibility = (modelUser.isVisibility()? 0 : 1);
+        int hasProfilePhoto = (modelUser.isHasProfilePhoto()? 0 : 1);
+        int avatar = modelUser.getAvatar();
+                
+        view.getUserInstagramTxt().setText(nameUser);
+        view.getDescricaotxt().setText(description);
+        
+        
+        view.getVisibilidadeJBox().setSelectedIndex(visibility);
+        view.getIsPhotoPerfil().setSelectedIndex(hasProfilePhoto);
+        
+        view.getAvatarBox().setSelectedIndex(avatar - 1);
     }
     
 }

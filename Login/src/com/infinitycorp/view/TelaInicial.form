@@ -2178,20 +2178,13 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="28" pref="28" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                                      <Component id="jPanel28" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="jTabbedPane4" alignment="1" min="-2" pref="547" max="-2" attributes="0"/>
-                                          <Component id="jPanel30" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
+                                  <Component id="jPanel28" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jTabbedPane4" alignment="1" min="-2" pref="547" max="-2" attributes="0"/>
+                                  <Component id="jPanel30" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="29" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -2239,8 +2232,8 @@
                                               <Component id="jLabel59" min="-2" max="-2" attributes="0"/>
                                               <Group type="102" attributes="0">
                                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                      <Component id="avatarBox" max="32767" attributes="0"/>
                                                       <Component id="jPanel25" max="32767" attributes="0"/>
-                                                      <Component id="avatarBox" pref="106" max="32767" attributes="0"/>
                                                   </Group>
                                                   <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -2248,7 +2241,7 @@
                                                           <Component id="jLabel58" min="-2" max="-2" attributes="0"/>
                                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                                       </Group>
-                                                      <Component id="userTxt" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="userInstagramTxt" alignment="0" max="32767" attributes="0"/>
                                                       <Group type="102" alignment="0" attributes="0">
                                                           <Group type="103" groupAlignment="0" attributes="0">
                                                               <Component id="VisibilidadeJBox" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
@@ -2287,7 +2280,7 @@
                                       <Group type="102" attributes="0">
                                           <Component id="jLabel58" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="userTxt" min="-2" max="-2" attributes="0"/>
+                                          <Component id="userInstagramTxt" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="3" attributes="0">
                                               <Component id="jLabel61" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -2311,9 +2304,9 @@
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Component class="javax.swing.JTextField" name="userTxt">
+                        <Component class="javax.swing.JTextField" name="userInstagramTxt">
                           <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="userTxtActionPerformed"/>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="userInstagramTxtActionPerformed"/>
                           </Events>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel58">
@@ -2399,6 +2392,7 @@
                             </Property>
                           </Properties>
                           <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="avatarBoxItemStateChanged"/>
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="avatarBoxActionPerformed"/>
                           </Events>
                           <AuxValues>
@@ -2410,15 +2404,36 @@
                           <Layout>
                             <DimensionLayout dim="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                                      <Component id="iconeProfile" min="-2" pref="19" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                             </DimensionLayout>
                             <DimensionLayout dim="1">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <EmptySpace min="0" pref="87" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace pref="22" max="32767" attributes="0"/>
+                                      <Component id="iconeProfile" min="-2" pref="12" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                             </DimensionLayout>
                           </Layout>
+                          <SubComponents>
+                            <Component class="javax.swing.JLabel" name="iconeProfile">
+                              <Properties>
+                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                                  <Connection code="new javax.swing.ImageIcon(imageUrl)" type="code"/>
+                                </Property>
+                              </Properties>
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="}"/>
+                                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="URL imageUrl = getClass().getResource(&quot;/com/infinitycorp/view/icon&quot;);&#xa;&#xa;if (imageUrl == null) {&#xa;&#xa;    System.out.println(&quot;Erro: Imagem n&#xe3;o encontrada&quot;);&#xa;&#xa;} else {&#xa;&#xa;ImageIcon icon = new ImageIcon(imageUrl);"/>
+                              </AuxValues>
+                            </Component>
+                          </SubComponents>
                         </Container>
                         <Component class="javax.swing.JComboBox" name="isPhotoPerfil">
                           <Properties>
@@ -2455,15 +2470,15 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jButton8" min="-2" max="-2" attributes="0"/>
+                                  <Component id="limparUserInstagramBTN" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jButton10" min="-2" max="-2" attributes="0"/>
+                                  <Component id="editarBTN" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jButton9" min="-2" max="-2" attributes="0"/>
+                                  <Component id="salvarUserInstagramBTN" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace pref="90" max="32767" attributes="0"/>
-                                  <Component id="jToggleButton1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="buscarBtn" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jTextField12" min="-2" pref="130" max="-2" attributes="0"/>
+                                  <Component id="buscarSearchTxt" min="-2" pref="130" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -2474,13 +2489,13 @@
                                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                          <Component id="jTextField12" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jToggleButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="buscarSearchTxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="buscarBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                          <Component id="jButton8" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jButton10" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jButton9" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="limparUserInstagramBTN" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="editarBTN" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="salvarUserInstagramBTN" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace min="0" pref="15" max="32767" attributes="0"/>
@@ -2489,31 +2504,40 @@
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Component class="javax.swing.JButton" name="jButton8">
+                        <Component class="javax.swing.JButton" name="limparUserInstagramBTN">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Limpar"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="limparUserInstagramBTNMouseClicked"/>
+                          </Events>
                         </Component>
-                        <Component class="javax.swing.JButton" name="jButton9">
+                        <Component class="javax.swing.JButton" name="salvarUserInstagramBTN">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Salvar"/>
                           </Properties>
                           <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton9ActionPerformed"/>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="salvarUserInstagramBTNActionPerformed"/>
                           </Events>
                         </Component>
-                        <Component class="javax.swing.JButton" name="jButton10">
+                        <Component class="javax.swing.JButton" name="editarBTN">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Editar"/>
                             <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="editarBTNMouseClicked"/>
+                          </Events>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="jTextField12">
+                        <Component class="javax.swing.JTextField" name="buscarSearchTxt">
                         </Component>
-                        <Component class="javax.swing.JToggleButton" name="jToggleButton1">
+                        <Component class="javax.swing.JToggleButton" name="buscarBtn">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Buscar"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="buscarBtnMouseClicked"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>

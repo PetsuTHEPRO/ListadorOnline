@@ -15,4 +15,12 @@ public class UserService {
         return (userDAO.insertUser(user) != false);
     }
     
+    public User selectUser(String user){
+        return (userDAO.selectForUser(user));
+    }
+    
+    public boolean updateSucess(User user){
+        return (userDAO.updateUser(user) != false);
+    }
+    
 }
