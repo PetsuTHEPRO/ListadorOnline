@@ -7,12 +7,16 @@ package com.infinitycorp.view;
 
 import com.infinitycorp.controller.TelaInicialController;
 import com.infinitycorp.model.identity.Client;
+import static com.infinitycorp.utils.OpenWebPage.openWebPage;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.TimerTask;
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -20,9 +24,10 @@ import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.Timer;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -31,14 +36,32 @@ import javax.swing.Timer;
 public class TelaInicial extends javax.swing.JFrame {
 
     private final TelaInicialController controller;
+    private boolean isLocked = false; // Controle para travar a abertura de outros menus
+
+    // O restante do código...
+
+    public void lockMenus() {
+        isLocked = true;
+    }
+
+    public void unlockMenus() {
+        isLocked = false;
+    }
+
+    public boolean isMenusLocked() {
+        return isLocked;
+    }
+    
     /**
      * Creates new form TelaInicial
      * @param clientLogin
      */
     public TelaInicial(Client clientLogin) {
         initComponents();
+        this.setTitle("Listador de Instagram - Desktop");
+        
         controller = new TelaInicialController(this, clientLogin);
-        controller.inicializeProgram();
+        controller.inicializeProgram((DefaultTableModel) this.getUsersJTABLE().getModel());
         execute();
     }
     
@@ -86,7 +109,6 @@ public class TelaInicial extends javax.swing.JFrame {
         }
         pnlOpcaoCadastro.revalidate();
     }
-    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -180,8 +202,8 @@ public class TelaInicial extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         txtformBirthDate = new javax.swing.JFormattedTextField();
-        jLabel16 = new javax.swing.JLabel();
         btnSalvar = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
         jLabel33 = new javax.swing.JLabel();
         jPanel17 = new javax.swing.JPanel();
         jPanel18 = new javax.swing.JPanel();
@@ -252,6 +274,15 @@ public class TelaInicial extends javax.swing.JFrame {
         buscarSearchTxt = new javax.swing.JTextField();
         buscarBtn = new javax.swing.JToggleButton();
         jTabbedPane4 = new javax.swing.JTabbedPane();
+        jPanel26 = new javax.swing.JPanel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        UsersJTABLE = new javax.swing.JTable();
+        jPanel31 = new javax.swing.JPanel();
+        limparUserInstagramBTN1 = new javax.swing.JButton();
+        salvarUserInstagramBTN1 = new javax.swing.JButton();
+        jLabel60 = new javax.swing.JLabel();
+        selectedLabel = new javax.swing.JLabel();
+        jButton8 = new javax.swing.JButton();
 
         jScrollPane3.setViewportView(jEditorPane1);
 
@@ -524,6 +555,8 @@ public class TelaInicial extends javax.swing.JFrame {
         jLabel24.setForeground(new java.awt.Color(102, 102, 102));
         jLabel24.setText("IG's Cadastrado");
 
+        jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(153, 153, 153));
         jLabel25.setText("0");
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
@@ -532,16 +565,13 @@ public class TelaInicial extends javax.swing.JFrame {
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel25))
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel11Layout.createSequentialGroup()
                         .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel24)
-                        .addGap(0, 28, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(jLabel24)))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -549,9 +579,9 @@ public class TelaInicial extends javax.swing.JFrame {
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(jLabel25)
-                .addContainerGap())
+                .addGap(0, 0, 0)
+                .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         jLabel22.setBackground(new java.awt.Color(51, 255, 51));
@@ -576,15 +606,16 @@ public class TelaInicial extends javax.swing.JFrame {
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addGap(11, 11, 11)
                         .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel26))
                     .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(jLabel31)
-                        .addGap(29, 29, 29)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel28)))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
@@ -594,11 +625,13 @@ public class TelaInicial extends javax.swing.JFrame {
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel31)
-                    .addComponent(jLabel28))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addComponent(jLabel28)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel31))))
         );
 
         jLabel23.setBackground(new java.awt.Color(255, 0, 0));
@@ -624,14 +657,14 @@ public class TelaInicial extends javax.swing.JFrame {
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel13Layout.createSequentialGroup()
                         .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel29))
                     .addGroup(jPanel13Layout.createSequentialGroup()
                         .addComponent(jLabel34)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel30)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -643,13 +676,11 @@ public class TelaInicial extends javax.swing.JFrame {
                     .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel30)
                         .addContainerGap())
-                    .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel34)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel34))))
         );
 
         jPanel14.setBackground(new java.awt.Color(255, 255, 255));
@@ -811,8 +842,8 @@ public class TelaInicial extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(4, 4, 4)
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -835,7 +866,7 @@ public class TelaInicial extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel19)
                     .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -908,12 +939,17 @@ public class TelaInicial extends javax.swing.JFrame {
         txtformBirthDate.setEditable(false);
         txtformBirthDate.setText("00/00/0000");
 
-        jLabel16.setText("Lápis");
-
         btnSalvar.setText("Salvar");
         btnSalvar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnSalvarMouseClicked(evt);
+            }
+        });
+
+        jButton9.setText("Mudar");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
             }
         });
 
@@ -948,9 +984,9 @@ public class TelaInicial extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(jLabel11)
                                         .addGap(18, 18, 18)
-                                        .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel16))
+                                        .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton9))
                                     .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -960,7 +996,7 @@ public class TelaInicial extends javax.swing.JFrame {
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel15)
                                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(21, Short.MAX_VALUE))
+                        .addContainerGap(14, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addGap(26, 26, 26)
@@ -998,7 +1034,7 @@ public class TelaInicial extends javax.swing.JFrame {
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16))
+                    .addComponent(jButton9))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -1016,7 +1052,7 @@ public class TelaInicial extends javax.swing.JFrame {
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         jLabel33.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -1629,6 +1665,11 @@ public class TelaInicial extends javax.swing.JFrame {
         });
 
         salvarUserInstagramBTN.setText("Salvar");
+        salvarUserInstagramBTN.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                salvarUserInstagramBTNMouseClicked(evt);
+            }
+        });
         salvarUserInstagramBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 salvarUserInstagramBTNActionPerformed(evt);
@@ -1661,7 +1702,7 @@ public class TelaInicial extends javax.swing.JFrame {
                 .addComponent(editarBTN)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(salvarUserInstagramBTN)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(buscarBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buscarSearchTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1688,18 +1729,18 @@ public class TelaInicial extends javax.swing.JFrame {
             jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel24Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel28, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel28, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTabbedPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 547, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel30, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         jPanel24Layout.setVerticalGroup(
             jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel24Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(jPanel28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1707,6 +1748,132 @@ public class TelaInicial extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("tab6", jPanel24);
+
+        UsersJTABLE.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "User", "Descrição", "Visibilidade", "Foto Perfil"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            };
+        });
+        UsersJTABLE.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                UsersJTABLEMouseClicked(evt);
+            }
+        });
+        UsersJTABLE.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                UsersJTABLEPropertyChange(evt);
+            }
+        });
+        jScrollPane7.setViewportView(UsersJTABLE);
+
+        jPanel31.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel31.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisar/Salvar"));
+
+        limparUserInstagramBTN1.setText("Atualizar");
+        limparUserInstagramBTN1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                limparUserInstagramBTN1MouseClicked(evt);
+            }
+        });
+
+        salvarUserInstagramBTN1.setText("Abrir Perfil");
+        salvarUserInstagramBTN1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                salvarUserInstagramBTN1MouseClicked(evt);
+            }
+        });
+        salvarUserInstagramBTN1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salvarUserInstagramBTN1ActionPerformed(evt);
+            }
+        });
+
+        jLabel60.setText("Selecionado:");
+
+        selectedLabel.setText("N/A");
+
+        jButton8.setText("Excluir");
+        jButton8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton8MouseClicked(evt);
+            }
+        });
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel31Layout = new javax.swing.GroupLayout(jPanel31);
+        jPanel31.setLayout(jPanel31Layout);
+        jPanel31Layout.setHorizontalGroup(
+            jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel31Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(limparUserInstagramBTN1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(salvarUserInstagramBTN1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel60)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(selectedLabel)
+                .addGap(53, 53, 53))
+        );
+        jPanel31Layout.setVerticalGroup(
+            jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel31Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(limparUserInstagramBTN1)
+                    .addComponent(salvarUserInstagramBTN1)
+                    .addComponent(jLabel60)
+                    .addComponent(selectedLabel)
+                    .addComponent(jButton8))
+                .addGap(0, 15, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel26Layout = new javax.swing.GroupLayout(jPanel26);
+        jPanel26.setLayout(jPanel26Layout);
+        jPanel26Layout.setHorizontalGroup(
+            jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel26Layout.createSequentialGroup()
+                .addContainerGap(39, Short.MAX_VALUE)
+                .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE)
+                    .addComponent(jPanel31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18))
+        );
+        jPanel26Layout.setVerticalGroup(
+            jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel26Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jPanel31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31))
+        );
+
+        jTabbedPane1.addTab("tab7", jPanel26);
 
         pnlDashboard.add(jTabbedPane1);
         jTabbedPane1.setBounds(0, 0, 610, 500);
@@ -1767,6 +1934,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private void salvarUserInstagramBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarUserInstagramBTNActionPerformed
         // TODO add your handling code here:
         controller.registerUser();
+        controller.getUserAll((DefaultTableModel) this.getUsersJTABLE().getModel());
     }//GEN-LAST:event_salvarUserInstagramBTNActionPerformed
 
     private void VisibilidadeJBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VisibilidadeJBoxActionPerformed
@@ -1793,6 +1961,8 @@ public class TelaInicial extends javax.swing.JFrame {
         // TODO add your handling code here:
         controller.limparCampoUserInstagram();
         this.userInstagramTxt.setEnabled(true);
+        this.salvarUserInstagramBTN.setEnabled(true);
+        this.editarBTN.setEnabled(false);
     }//GEN-LAST:event_limparUserInstagramBTNMouseClicked
 
     private void editarBTNMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editarBTNMouseClicked
@@ -1842,6 +2012,67 @@ public class TelaInicial extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_avatarBoxItemStateChanged
 
+    private void limparUserInstagramBTN1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_limparUserInstagramBTN1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_limparUserInstagramBTN1MouseClicked
+
+    private void salvarUserInstagramBTN1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarUserInstagramBTN1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_salvarUserInstagramBTN1ActionPerformed
+
+    private void salvarUserInstagramBTNMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salvarUserInstagramBTNMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_salvarUserInstagramBTNMouseClicked
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here: 
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void UsersJTABLEPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_UsersJTABLEPropertyChange
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_UsersJTABLEPropertyChange
+
+    private void salvarUserInstagramBTN1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salvarUserInstagramBTN1MouseClicked
+        // TODO add your handling code here:
+        int selectedRow = this.getUsersJTABLE().getSelectedRow();
+        
+        String userPerfil = (String) this.getUsersJTABLE().getValueAt(selectedRow, 1);
+        // Verificação de segurança usando expressão regular
+        if (isValidUserProfile(userPerfil)) {
+            openWebPage("https://www.instagram.com/" + userPerfil + "/");
+        } else {
+            JOptionPane.showMessageDialog(null, "Nome de perfil inválido. Apenas letras, números e '.' são permitidos.");
+        }
+    }//GEN-LAST:event_salvarUserInstagramBTN1MouseClicked
+
+    // Método para verificar se o perfil é válido
+    private boolean isValidUserProfile(String userPerfil) {
+        return userPerfil.matches("[a-zA-Z0-9\\.]+"); // Apenas letras, números e pontos
+    }
+    
+    private void UsersJTABLEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UsersJTABLEMouseClicked
+        // TODO add your handling code here:
+        int selectedRow = this.getUsersJTABLE().getSelectedRow();
+        
+        String userPerfil = (String) this.getUsersJTABLE().getValueAt(selectedRow, 1);
+        
+        this.selectedLabel.setText(userPerfil);
+    }//GEN-LAST:event_UsersJTABLEMouseClicked
+
+    private void jButton8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseClicked
+        // TODO add your handling code here:
+        int selectedRow = this.getUsersJTABLE().getSelectedRow();
+        
+        String userPerfil = (String) this.getUsersJTABLE().getValueAt(selectedRow, 1);
+        
+        controller.excluirUser(userPerfil, (DefaultTableModel) this.getUsersJTABLE().getModel());
+    }//GEN-LAST:event_jButton8MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1878,6 +2109,7 @@ public class TelaInicial extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea Descricaotxt;
+    private javax.swing.JTable UsersJTABLE;
     private javax.swing.JComboBox<String> VisibilidadeJBox;
     private javax.swing.JComboBox<String> avatarBox;
     private javax.swing.JButton btnSalvar;
@@ -1893,6 +2125,8 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JFrame jFrame1;
@@ -1903,7 +2137,6 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
@@ -1952,6 +2185,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel64;
     private javax.swing.JLabel jLabel65;
@@ -1976,10 +2210,12 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel23;
     private javax.swing.JPanel jPanel24;
     private javax.swing.JPanel jPanel25;
+    private javax.swing.JPanel jPanel26;
     private javax.swing.JPanel jPanel27;
     private javax.swing.JPanel jPanel28;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel30;
+    private javax.swing.JPanel jPanel31;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
@@ -1999,6 +2235,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator2;
@@ -2026,10 +2263,13 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField8;
     private javax.swing.JLabel lblCreditos;
     private javax.swing.JButton limparUserInstagramBTN;
+    private javax.swing.JButton limparUserInstagramBTN1;
     private javax.swing.JPanel pnlDashboard;
     private javax.swing.JPanel pnlMenu;
     private javax.swing.JPanel pnlOpcaoCadastro;
     private javax.swing.JButton salvarUserInstagramBTN;
+    private javax.swing.JButton salvarUserInstagramBTN1;
+    private javax.swing.JLabel selectedLabel;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtLastName;
     private javax.swing.JTextField txtName;
@@ -2141,6 +2381,14 @@ public class TelaInicial extends javax.swing.JFrame {
 
     public void setSalvarUserInstagramBTN(JButton salvarUserInstagramBTN) {
         this.salvarUserInstagramBTN = salvarUserInstagramBTN;
+    }
+
+    public JTable getUsersJTABLE() {
+        return UsersJTABLE;
+    }
+
+    public void setUsersJTABLE(JTable UsersJTABLE) {
+        this.UsersJTABLE = UsersJTABLE;
     }
     
 }

@@ -2,6 +2,7 @@ package com.infinitycorp.model.service;
 
 import com.infinitycorp.model.DAO.UserDAO;
 import com.infinitycorp.model.identity.User;
+import java.util.List;
 
 public class UserService {
     
@@ -21,6 +22,14 @@ public class UserService {
     
     public boolean updateSucess(User user){
         return (userDAO.updateUser(user) != false);
+    }
+    
+    public List<User> selectAllUserModel(){
+        return userDAO.selectAllUser();
+    }
+
+    public boolean deleteUser(String nameUser) {
+        return userDAO.deleteUser(nameUser);
     }
     
 }

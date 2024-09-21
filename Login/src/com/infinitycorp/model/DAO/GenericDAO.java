@@ -12,6 +12,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -90,7 +92,37 @@ public class GenericDAO {
         }
         
         return null;
-    }    
+    }
+
+    public List<User> selectGenericUsers(String select, Object... paramentos) {
+        List<User> users = new ArrayList<>();
+
+        try {
+            PreparedStatement pStatement = connection.prepareStatement(select);
+
+            for (int i = 0; i < paramentos.length; i++) {
+                pStatement.setObject(i + 1, paramentos[i]);
+            }
+
+            ResultSet rSet = pStatement.executeQuery(); // Use executeQuery para obter ResultSet
+
+            while (rSet.next()) { // Itera sobre todas as linhas do ResultSet
+                User user = new User();
+                user.setId(rSet.getInt("id"));
+                user.setName(rSet.getString("name"));
+                user.setDescription(rSet.getString("description"));
+                user.setVisibility(rSet.getBoolean("visibility"));
+                user.setHasProfilePhoto(rSet.getBoolean("has_profile_photo"));
+                user.setAvatar(rSet.getInt("avatar")); // Presumindo que avatar seja uma String
+
+                users.add(user); // Adiciona o usuário à lista
+            }
+        } catch (SQLException e) {
+            System.out.println("Error " + e);
+        }
+
+        return users; // Retorna a lista de usuários
+    }
     
     public boolean insertGeneric(String insert, Object... paramentos){
 
@@ -133,20 +165,22 @@ public class GenericDAO {
     }
 
     
-    public boolean deleteGeneric(String delete, Object... paramentos) throws SQLException{
+    public boolean deleteGeneric(String delete, Object... paramentos) {
         
-        PreparedStatement pStatement = connection.prepareStatement(delete);
+        try (PreparedStatement pStatement = connection.prepareStatement(delete)) {
+            
+            for (int i = 0; i < paramentos.length; i++) {
+                pStatement.setObject(i+1, paramentos[i]);
+             }
+            
+            int affectedRows = pStatement.executeUpdate();
+            return affectedRows > 0; // Retorna true se alguma linha foi afetada
         
-        for(int i = 0; i < paramentos.length; i++){
-            pStatement.setObject(i+1, paramentos[i]);
+        } catch (SQLException e) {
+            System.out.println("Erro ao executar atualização: " + e.getMessage());
         }
-        
-        pStatement.execute();
-        
-        ResultSet rSet = pStatement.getResultSet();
-        
-        return rSet.next();
-        
+                
+        return false;
     }
     
 }

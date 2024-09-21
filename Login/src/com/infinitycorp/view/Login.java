@@ -22,6 +22,7 @@ public class Login extends javax.swing.JFrame {
  
     public Login(){
         initComponents();
+        this.setTitle("Tela de Login");
         controller = new LoginController(this);
     }
 

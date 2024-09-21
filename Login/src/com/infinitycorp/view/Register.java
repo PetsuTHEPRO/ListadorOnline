@@ -14,6 +14,7 @@ public class Register extends javax.swing.JFrame {
  
     public Register() {
         initComponents();
+        this.setTitle("Tela de Cadastro");
         controller = new RegisterController(this);
     }
 

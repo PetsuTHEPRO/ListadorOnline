@@ -118,4 +118,22 @@ public class TelaInicialHelper implements IHelper{
         view.getAvatarBox().setSelectedIndex(avatar - 1);
     }
     
+    public boolean validateUserInput() {
+        String userTxt = view.getUserInstagramTxt().getText().trim();
+        String descricaoTxt = view.getDescricaotxt().getText().trim();
+
+        // Verifica se o nome do usuário está vazio
+        if (userTxt.isEmpty()) {
+            return false;
+    }
+
+        // Verifica se a descrição está vazia
+        if (descricaoTxt.isEmpty()) {
+            return false;
+        }
+
+        // Se todos os campos estão válidos
+        return true;
+    }
+    
 }
