@@ -9,6 +9,7 @@ import com.infinitycorp.controller.LoginController;
 import java.awt.Color;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -45,144 +46,173 @@ public class Login extends javax.swing.JFrame {
         lblTitutoLogin = new javax.swing.JLabel();
         lblSubtitutoLogin = new javax.swing.JLabel();
         lblCadastro = new javax.swing.JLabel();
-        btnLogin = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        lblInfoText = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        String imagePath2 = "src/com/infinitycorp/view/icon/Forms.png";
+        ImageIcon icon2 = new ImageIcon(imagePath2);
 
-        jLabel6.setText("Insirar aqui uma Imagem");
-        jLabel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        // Verifica se a imagem foi carregada corretamente
+        if (icon2.getIconWidth() == -1) {
+            System.out.println("Imagem não encontrada: " + imagePath2);
+        } else {
+            System.out.println("Imagem encontrada: " + imagePath2);
+            jLabel1 = new javax.swing.JLabel(icon2);
+            btnLogin = new javax.swing.JPanel();
+            jLabel2 = new javax.swing.JLabel();
+            lblInfoText = new javax.swing.JLabel();
+            String imagePath = "src/com/infinitycorp/view/icon/User.png";
+            ImageIcon icon = new ImageIcon(imagePath);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+            // Verifica se a imagem foi carregada corretamente
+            if (icon.getIconWidth() == -1) {
+                System.out.println("Imagem não encontrada: " + imagePath);
+            } else {
+                System.out.println("Imagem encontrada: " + imagePath);
+                profileLogin = new javax.swing.JLabel(icon);
 
-        jPanel1.setBackground(new java.awt.Color(142, 39, 217));
+                jLabel6.setText("Insirar aqui uma Imagem");
+                jLabel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        lblUsuario.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblUsuario.setForeground(new java.awt.Color(16, 18, 15));
-        lblUsuario.setText("Usuário:");
+                setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lblSenha.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblSenha.setForeground(new java.awt.Color(16, 18, 15));
-        lblSenha.setText("Senha:");
-        lblSenha.setToolTipText("");
+                jPanel1.setBackground(new java.awt.Color(142, 39, 217));
 
-        txtClient.setBackground(new java.awt.Color(74, 80, 67));
-        txtClient.setForeground(new java.awt.Color(255, 255, 255));
-        txtClient.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        txtClient.setMargin(new java.awt.Insets(2, 10, 2, 2));
-        txtClient.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtClientActionPerformed(evt);
+                lblUsuario.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+                lblUsuario.setForeground(new java.awt.Color(16, 18, 15));
+                lblUsuario.setText("Usuário:");
+
+                lblSenha.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+                lblSenha.setForeground(new java.awt.Color(16, 18, 15));
+                lblSenha.setText("Senha:");
+                lblSenha.setToolTipText("");
+
+                txtClient.setBackground(new java.awt.Color(74, 80, 67));
+                txtClient.setForeground(new java.awt.Color(255, 255, 255));
+                txtClient.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+                txtClient.setMargin(new java.awt.Insets(2, 10, 2, 2));
+                txtClient.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        txtClientActionPerformed(evt);
+                    }
+                });
+
+                txtPassword.setBackground(new java.awt.Color(74, 80, 67));
+                txtPassword.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+                jPanel2.setBackground(new java.awt.Color(59, 16, 89));
+                jPanel2.setBorder(BorderFactory.createMatteBorder(0, 2, 0, 0, new java.awt.Color(190,39,217)));
+
+                lblTitutoLogin.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+                lblTitutoLogin.setForeground(new java.awt.Color(255, 255, 255));
+                lblTitutoLogin.setText("Listador Online");
+
+                lblSubtitutoLogin.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+                lblSubtitutoLogin.setForeground(new java.awt.Color(255, 255, 255));
+                lblSubtitutoLogin.setText("Organize seus IG's para sorteios");
+
+                lblCadastro.setFont(new java.awt.Font("Monospaced", 3, 12)); // NOI18N
+                lblCadastro.setForeground(new java.awt.Color(53, 167, 255));
+                lblCadastro.setText("Não tem um cadastro ainda? Clique aqui");
+                lblCadastro.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(106,127,219)));
+                lblCadastro.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+                lblCadastro.addMouseListener(new java.awt.event.MouseAdapter() {
+                    public void mouseClicked(java.awt.event.MouseEvent evt) {
+                        lblCadastroMouseClicked(evt);
+                    }
+                });
+
             }
-        });
+            jLabel1.setText("");
 
-        txtPassword.setBackground(new java.awt.Color(74, 80, 67));
-        txtPassword.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+            javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+            jPanel2.setLayout(jPanel2Layout);
+            jPanel2Layout.setHorizontalGroup(
+                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1)
+                    .addGap(90, 90, 90))
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(lblCadastro)
+                            .addGap(0, 0, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                            .addGap(0, 0, Short.MAX_VALUE)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                    .addComponent(lblTitutoLogin)
+                                    .addGap(73, 73, 73))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                    .addComponent(lblSubtitutoLogin)
+                                    .addGap(21, 21, 21))))))
+            );
+            jPanel2Layout.setVerticalGroup(
+                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addGap(41, 41, 41)
+                    .addComponent(lblTitutoLogin)
+                    .addGap(58, 58, 58)
+                    .addComponent(jLabel1)
+                    .addGap(30, 30, 30)
+                    .addComponent(lblSubtitutoLogin)
+                    .addGap(33, 33, 33)
+                    .addComponent(lblCadastro)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            );
 
-        jPanel2.setBackground(new java.awt.Color(59, 16, 89));
-        jPanel2.setBorder(BorderFactory.createMatteBorder(0, 2, 0, 0, new java.awt.Color(190,39,217)));
+            btnLogin.setBackground(new java.awt.Color(223, 36, 40));
+            btnLogin.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+            btnLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+            btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    btnLoginMouseClicked(evt);
+                }
+                public void mouseEntered(java.awt.event.MouseEvent evt) {
+                    btnLoginMouseEntered(evt);
+                }
+                public void mouseExited(java.awt.event.MouseEvent evt) {
+                    btnLoginMouseExited(evt);
+                }
+            });
 
-        lblTitutoLogin.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
-        lblTitutoLogin.setForeground(new java.awt.Color(255, 255, 255));
-        lblTitutoLogin.setText("Listador Online");
+            jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 11)); // NOI18N
+            jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+            jLabel2.setText("ENTRAR");
+            jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    jLabel2MouseClicked(evt);
+                }
+                public void mouseEntered(java.awt.event.MouseEvent evt) {
+                    jLabel2MouseEntered(evt);
+                }
+            });
 
-        lblSubtitutoLogin.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
-        lblSubtitutoLogin.setForeground(new java.awt.Color(255, 255, 255));
-        lblSubtitutoLogin.setText("Organize seus IG's para sorteios");
+            javax.swing.GroupLayout btnLoginLayout = new javax.swing.GroupLayout(btnLogin);
+            btnLogin.setLayout(btnLoginLayout);
+            btnLoginLayout.setHorizontalGroup(
+                btnLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnLoginLayout.createSequentialGroup()
+                    .addContainerGap(15, Short.MAX_VALUE)
+                    .addComponent(jLabel2)
+                    .addGap(14, 14, 14))
+            );
+            btnLoginLayout.setVerticalGroup(
+                btnLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(btnLoginLayout.createSequentialGroup()
+                    .addGap(5, 5, 5)
+                    .addComponent(jLabel2)
+                    .addGap(5, 5, 5))
+            );
 
-        lblCadastro.setFont(new java.awt.Font("Monospaced", 3, 12)); // NOI18N
-        lblCadastro.setForeground(new java.awt.Color(53, 167, 255));
-        lblCadastro.setText("Não tem um cadastro ainda? Clique aqui");
-        lblCadastro.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(106,127,219)));
-        lblCadastro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblCadastro.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblCadastroMouseClicked(evt);
-            }
-        });
+            lblInfoText.setForeground(new java.awt.Color(255, 255, 255));
+            lblInfoText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+            lblInfoText.setText("Seja Bem-vindo!");
+            lblInfoText.setToolTipText("");
+            lblInfoText.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+            lblInfoText.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblCadastro)
-                .addGap(0, 9, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(lblSubtitutoLogin)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblTitutoLogin)
-                .addGap(73, 73, 73))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(lblTitutoLogin)
-                .addGap(155, 155, 155)
-                .addComponent(lblSubtitutoLogin)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                .addComponent(lblCadastro)
-                .addGap(46, 46, 46))
-        );
-
-        btnLogin.setBackground(new java.awt.Color(223, 36, 40));
-        btnLogin.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        btnLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnLoginMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnLoginMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnLoginMouseExited(evt);
-            }
-        });
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 11)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("ENTRAR");
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel2MouseEntered(evt);
-            }
-        });
-
-        javax.swing.GroupLayout btnLoginLayout = new javax.swing.GroupLayout(btnLogin);
-        btnLogin.setLayout(btnLoginLayout);
-        btnLoginLayout.setHorizontalGroup(
-            btnLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnLoginLayout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(14, 14, 14))
-        );
-        btnLoginLayout.setVerticalGroup(
-            btnLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnLoginLayout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addComponent(jLabel2)
-                .addGap(5, 5, 5))
-        );
-
-        lblInfoText.setForeground(new java.awt.Color(255, 255, 255));
-        lblInfoText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblInfoText.setText("Seja Bem-vindo!");
-        lblInfoText.setToolTipText("");
-        lblInfoText.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        lblInfoText.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        jLabel7.setText("Insirar aqui uma Imagem");
-        jLabel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        }
+        profileLogin.setText("");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -200,23 +230,24 @@ public class Login extends javax.swing.JFrame {
                         .addGap(153, 153, 153)
                         .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(171, 171, 171)
-                        .addComponent(lblUsuario))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(177, 177, 177)
                         .addComponent(lblSenha))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(133, 133, 133)
-                        .addComponent(jLabel7)))
+                        .addGap(163, 163, 163)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(profileLogin)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(lblUsuario)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(74, 74, 74)
-                .addComponent(jLabel7)
-                .addGap(61, 61, 61)
+                .addGap(40, 40, 40)
+                .addComponent(profileLogin)
+                .addGap(44, 44, 44)
                 .addComponent(lblUsuario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtClient, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -228,7 +259,7 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(lblInfoText)
                 .addGap(18, 18, 18)
                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -241,7 +272,7 @@ public class Login extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -320,9 +351,9 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnLogin;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblCadastro;
@@ -331,6 +362,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel lblSubtitutoLogin;
     private javax.swing.JLabel lblTitutoLogin;
     private javax.swing.JLabel lblUsuario;
+    private javax.swing.JLabel profileLogin;
     private javax.swing.JTextField txtClient;
     private javax.swing.JPasswordField txtPassword;
     // End of variables declaration//GEN-END:variables
